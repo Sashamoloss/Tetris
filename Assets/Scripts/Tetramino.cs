@@ -1,9 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Tetramino : MonoBehaviour
 {
+    private Controles Inputs;
+    float lastFall = 0;
+    private void OnEnable()
+    {
+        Inputs = new Controles();
+        Inputs.Enable();
+        Inputs.AM.Deplacement.performed += DeplacementLateral;
+        Inputs.AM.Rotation.performed += Rotation;
+        Inputs.AM.Chute.performed += Chute;
+    }
+
+
+
+    private void DeplacementLateral(InputAction.CallbackContext CBC)
+    {
+        var Direction = CBC.ReadValue<float>();
+        transform.position += new Vector3(Direction, 0, 0);
+        if (IsValidGridPos())
+            UpdateGrid();
+        else
+            transform.position += new Vector3(-Direction, 0, 0);
+    }
+    private void Rotation(InputAction.CallbackContext CBC)
+    {
+        var Rotation = CBC.ReadValue<float>();
+        transform.Rotate (0, 0, Rotation*90);
+        if (IsValidGridPos())
+            UpdateGrid();
+        else
+            transform.Rotate(0, 0, -Rotation * 90);
+    }
+    private void Chute(InputAction.CallbackContext CBC)
+    {
+        transform.position += Vector3.down;
+        if (IsValidGridPos())
+            UpdateGrid();
+        else
+        {
+            transform.position += Vector3.up;
+            Playfield.instance.DeleteFullRows();
+            FindObjectOfType<Spawneur>().SpawnNext();
+            Destroy(this);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -47,5 +92,9 @@ public class Tetramino : MonoBehaviour
     void Update()
     {
         
+    }
+    private void OnDisable()
+    {
+        Inputs.Disable();
     }
 }

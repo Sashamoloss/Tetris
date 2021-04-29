@@ -12,7 +12,7 @@ public class Spawneur : MonoBehaviour
     }
 
     // Update is called once per frame
-    void SpawnNext()
+    public void SpawnNext()
     {
         int i = Random.Range(0, tetraminos.Length);
         Instantiate(tetraminos[i], transform.position, Quaternion.identity);

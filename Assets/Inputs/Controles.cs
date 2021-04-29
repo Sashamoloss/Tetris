@@ -28,8 +28,16 @@ public class @Controles : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Rotation"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""688b0299-14e4-4a40-af94-30ccf5930e0b"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Chute"",
+                    ""type"": ""Button"",
+                    ""id"": ""6a74b3a5-c63e-4b67-8b7b-667e8379103e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -50,7 +58,7 @@ public class @Controles : IInputActionCollection, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""4cfa2b25-646e-456c-bc6a-abb54437c392"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -101,6 +109,17 @@ public class @Controles : IInputActionCollection, IDisposable
                     ""action"": ""Rotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8bcff637-bc74-48b3-ae4c-1d4c8078e958"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Chute"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -111,6 +130,7 @@ public class @Controles : IInputActionCollection, IDisposable
         m_AM = asset.FindActionMap("AM", throwIfNotFound: true);
         m_AM_Deplacement = m_AM.FindAction("Deplacement", throwIfNotFound: true);
         m_AM_Rotation = m_AM.FindAction("Rotation", throwIfNotFound: true);
+        m_AM_Chute = m_AM.FindAction("Chute", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -162,12 +182,14 @@ public class @Controles : IInputActionCollection, IDisposable
     private IAMActions m_AMActionsCallbackInterface;
     private readonly InputAction m_AM_Deplacement;
     private readonly InputAction m_AM_Rotation;
+    private readonly InputAction m_AM_Chute;
     public struct AMActions
     {
         private @Controles m_Wrapper;
         public AMActions(@Controles wrapper) { m_Wrapper = wrapper; }
         public InputAction @Deplacement => m_Wrapper.m_AM_Deplacement;
         public InputAction @Rotation => m_Wrapper.m_AM_Rotation;
+        public InputAction @Chute => m_Wrapper.m_AM_Chute;
         public InputActionMap Get() { return m_Wrapper.m_AM; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -183,6 +205,9 @@ public class @Controles : IInputActionCollection, IDisposable
                 @Rotation.started -= m_Wrapper.m_AMActionsCallbackInterface.OnRotation;
                 @Rotation.performed -= m_Wrapper.m_AMActionsCallbackInterface.OnRotation;
                 @Rotation.canceled -= m_Wrapper.m_AMActionsCallbackInterface.OnRotation;
+                @Chute.started -= m_Wrapper.m_AMActionsCallbackInterface.OnChute;
+                @Chute.performed -= m_Wrapper.m_AMActionsCallbackInterface.OnChute;
+                @Chute.canceled -= m_Wrapper.m_AMActionsCallbackInterface.OnChute;
             }
             m_Wrapper.m_AMActionsCallbackInterface = instance;
             if (instance != null)
@@ -193,6 +218,9 @@ public class @Controles : IInputActionCollection, IDisposable
                 @Rotation.started += instance.OnRotation;
                 @Rotation.performed += instance.OnRotation;
                 @Rotation.canceled += instance.OnRotation;
+                @Chute.started += instance.OnChute;
+                @Chute.performed += instance.OnChute;
+                @Chute.canceled += instance.OnChute;
             }
         }
     }
@@ -201,5 +229,6 @@ public class @Controles : IInputActionCollection, IDisposable
     {
         void OnDeplacement(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
+        void OnChute(InputAction.CallbackContext context);
     }
 }

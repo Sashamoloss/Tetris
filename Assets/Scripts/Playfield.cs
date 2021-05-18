@@ -84,7 +84,7 @@ public class Playfield : MonoBehaviour
     public bool InsideBorder (Vector2 pos)
     {
         return ((int)pos.x >= 0 && // on cast le float pos.x en int car on ne peut pas avoir d’index à virgule
-                (int)pos.x >= w &&
+                (int)pos.x < w &&
                 (int)pos.y >= 0);
     }
 
@@ -105,7 +105,7 @@ public class Playfield : MonoBehaviour
         return true;
     }
     /// <summary>
-    /// Effacer toutes les lignes pleines dans tout le Playfield
+    /// Efface toutes les lignes pleines dans tout le Playfield
     /// </summary>
     public void DeleteFullRows ()
     {
@@ -116,6 +116,26 @@ public class Playfield : MonoBehaviour
                 DeleteRow(i);//On l’efface
                 DecreaseRowsAbove(i + 1);//On baisse toutes les lignes au dessus de celle qu’on vient d’effacer
                 --i;//On baisse i de un pour revérifier si la ligne est pleine
+            }
+        }
+    }
+    //debug
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.white;
+        if (grid == null)
+        {
+            return;
+        }
+        for (int i = 0; i < w; i++)
+        {
+            for (int j = 0; j < h; j++)
+            {
+                if (grid[i,j]!=null)
+                {
+                    Gizmos.DrawCube(grid[i, j].position, Vector3.one);
+                }
+                
             }
         }
     }

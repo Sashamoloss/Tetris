@@ -17,7 +17,10 @@ public class Tetramino : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// Déplace le tetramino à droite ou à gauche (le redéplace dans l'autre sens si la position est invalide)
+    /// </summary>
+    /// <param name="CBC"></param>
     private void DeplacementLateral(InputAction.CallbackContext CBC)
     {
         var Direction = CBC.ReadValue<float>();
@@ -27,6 +30,10 @@ public class Tetramino : MonoBehaviour
         else
             transform.position += new Vector3(-Direction, 0, 0);
     }
+    /// <summary>
+    /// Pour tourner le tetramino à droite ou à gauche (le retourne dans l'autre sens si la position est invalide)
+    /// </summary>
+    /// <param name="CBC"></param>
     private void Rotation(InputAction.CallbackContext CBC)
     {
         var Rotation = CBC.ReadValue<float>();
@@ -36,11 +43,17 @@ public class Tetramino : MonoBehaviour
         else
             transform.Rotate(0, 0, -Rotation * 90);
     }
+    /// <summary>
+    /// Pour descendre le tetramino d'un cran en bas (à implémenter: qu'on puisse maintenir le bouton)
+    /// </summary>
+    /// <param name="CBC"></param>
     private void Chute(InputAction.CallbackContext CBC)
     {
-        transform.position += Vector3.down;
-        if (IsValidGridPos())
+        transform.position += Vector3.down;//On descend le transform d'un cran
+        if (IsValidGridPos())//Si la position est valide, on update la grille
             UpdateGrid();
+        //Sinon on remonte le transform, on efface les lignes pleines car ça veut dire qu'on est arrivés tout en bas
+        //Puis on fait spawner le prochain tetramino avant de détruire ce script pour ne pas déplacer le tetramino tombé tout en bas
         else
         {
             transform.position += Vector3.up;
@@ -52,7 +65,13 @@ public class Tetramino : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //Si la position du Tetramino qui spawn n'est pas valide, on détruit celui-ci et c'est le Game Over
+        //C'est dans le start pour éviter de le déplacer alors qu'il ne pourrait pas
+        if (!IsValidGridPos())
+        {
+            Debug.Log("GAME OVER");
+            Destroy(gameObject);
+        }
     }
     /// <summary>
     /// Vérifie que la position des blocs est entre les bordures et ne collisionne pas avec un autre Tétramino
@@ -71,15 +90,18 @@ public class Tetramino : MonoBehaviour
         }
         return true; //Sinon, la position est valide
     }
+   /// <summary>
+   /// Vérifie que chaque bloc est à la bonne place et est bien lié à son tetramino
+   /// </summary>
     void UpdateGrid()
     {
         for (int i = 0; i < Playfield.instance.h; i++)//On vérifie de haut en bas
         {
             for (int j = 0; j < Playfield.instance.w; j++)//Et de gauche à droite
             {
-                if (Playfield.instance.grid[i, j] != null)//S’il y a qqch à i,j
-                    if (Playfield.instance.grid[i, j].parent == transform)//Et que le parent de ce qqch est le nôtre
-                        Playfield.instance.grid[i, j] = null;//On efface ce qu’il y a à cet endroit
+                if (Playfield.instance.grid[j, i] != null)//S’il y a qqch à i,j
+                    if (Playfield.instance.grid[j, i].parent == transform)//Et que le parent de ce qqch est le nôtre
+                        Playfield.instance.grid[j, i] = null;//On efface ce qu’il y a à cet endroit
             }
         }
         foreach (Transform child in transform)//Pour chaque Transform dans le transform = pour chaque enfant
@@ -93,6 +115,9 @@ public class Tetramino : MonoBehaviour
     {
         
     }
+    /// <summary>
+    /// Désactive les inputs à la désactivation du script (pour éviter des bugs ?)
+    /// </summary>
     private void OnDisable()
     {
         Inputs.Disable();

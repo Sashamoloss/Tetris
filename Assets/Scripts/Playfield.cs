@@ -8,6 +8,8 @@ public class Playfield : MonoBehaviour
     public int w = 10; //Largeur du Playfield
     public int h = 20; //Hauteur du Playfield
     public Transform[,] grid;
+    public float tempsAvantChuteAuto;
+    public float tempsAvantChuteManuelle;
     
     private void Awake()//Pour qu’il n’y ait qu’un seul Playfield par scène
     {

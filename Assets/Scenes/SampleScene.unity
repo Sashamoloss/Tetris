@@ -288,6 +288,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   w: 10
   h: 30
+  tempsAvantChuteAuto: 1
+  tempsAvantChuteManuelle: 0.1
 --- !u!4 &952779741
 Transform:
   m_ObjectHideFlags: 0

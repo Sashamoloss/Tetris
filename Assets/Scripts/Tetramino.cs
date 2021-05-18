@@ -7,14 +7,24 @@ public class Tetramino : MonoBehaviour
 {
     private Controles Inputs;
     float lastFall = 0;
+    private Coroutine coroutineChute;
     private void OnEnable()
     {
         Inputs = new Controles();
         Inputs.Enable();
         Inputs.AM.Deplacement.performed += DeplacementLateral;
         Inputs.AM.Rotation.performed += Rotation;
-        Inputs.AM.Chute.performed += Chute;
+        Inputs.AM.Chute.performed += ChuteManuellePerformed;
+        Inputs.AM.Chute.canceled += ChuteManuelleCanceled;
+        Inputs.AM.ChuteInstant.performed += ChuteInstant;
     }
+
+    private void ChuteInstant(InputAction.CallbackContext CBC)
+    {
+        StartCoroutine(CoroutineChuteInstant());
+    }
+
+
 
 
     /// <summary>
@@ -43,11 +53,37 @@ public class Tetramino : MonoBehaviour
         else
             transform.Rotate(0, 0, -Rotation * 90);
     }
+    IEnumerator CoroutineChute()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Playfield.instance.tempsAvantChuteManuelle);
+            Chute();
+        }
+
+    }
+    IEnumerator CoroutineChuteInstant()
+    {
+        while (true)
+        {
+            yield return null;
+                Chute();
+        }
+    }
     /// <summary>
     /// Pour descendre le tetramino d'un cran en bas (à implémenter: qu'on puisse maintenir le bouton)
     /// </summary>
     /// <param name="CBC"></param>
-    private void Chute(InputAction.CallbackContext CBC)
+    private void ChuteManuellePerformed(InputAction.CallbackContext CBC)
+    {
+        coroutineChute = StartCoroutine(CoroutineChute());
+        Chute();
+    }    
+    private void ChuteManuelleCanceled(InputAction.CallbackContext CBC)
+    {
+        StopCoroutine(coroutineChute);
+    }
+    private void Chute()
     {
         transform.position += Vector3.down;//On descend le transform d'un cran
         if (IsValidGridPos())//Si la position est valide, on update la grille
@@ -62,10 +98,11 @@ public class Tetramino : MonoBehaviour
             Destroy(this);
         }
     }
+
     // Start is called before the first frame update
     void Start()
     {
-        //Si la position du Tetramino qui spawn n'est pas valide, on détruit celui-ci et c'est le Game Over
+        //Si la position du Tetramino qui spawn n'est pas valide, on détruit celui-ci et c'est le Game Over (et y a pas de spawnnext)
         //C'est dans le start pour éviter de le déplacer alors qu'il ne pourrait pas
         if (!IsValidGridPos())
         {
@@ -113,7 +150,11 @@ public class Tetramino : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Time.time - lastFall >= Playfield.instance.tempsAvantChuteAuto) //Si la différence entre le temps écoulé depuis le début du jeu et celui depuis la dernière chute est supérieur à la variable de chute automatique
+        {
+            Chute();//On descend automatiquement
+            lastFall = Time.time;//on reset la variable contenant le temps depuis la dernière chute
+        }
     }
     /// <summary>
     /// Désactive les inputs à la désactivation du script (pour éviter des bugs ?)

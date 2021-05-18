@@ -41,6 +41,14 @@ public class @Controles : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ChuteInstant"",
+                    ""type"": ""Button"",
+                    ""id"": ""a2bbe689-4e20-4659-85ad-b2ee05beee97"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -120,6 +128,17 @@ public class @Controles : IInputActionCollection, IDisposable
                     ""action"": ""Chute"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""17a10cb2-4a98-40ff-abea-1128b37366ef"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChuteInstant"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -131,6 +150,7 @@ public class @Controles : IInputActionCollection, IDisposable
         m_AM_Deplacement = m_AM.FindAction("Deplacement", throwIfNotFound: true);
         m_AM_Rotation = m_AM.FindAction("Rotation", throwIfNotFound: true);
         m_AM_Chute = m_AM.FindAction("Chute", throwIfNotFound: true);
+        m_AM_ChuteInstant = m_AM.FindAction("ChuteInstant", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,6 +203,7 @@ public class @Controles : IInputActionCollection, IDisposable
     private readonly InputAction m_AM_Deplacement;
     private readonly InputAction m_AM_Rotation;
     private readonly InputAction m_AM_Chute;
+    private readonly InputAction m_AM_ChuteInstant;
     public struct AMActions
     {
         private @Controles m_Wrapper;
@@ -190,6 +211,7 @@ public class @Controles : IInputActionCollection, IDisposable
         public InputAction @Deplacement => m_Wrapper.m_AM_Deplacement;
         public InputAction @Rotation => m_Wrapper.m_AM_Rotation;
         public InputAction @Chute => m_Wrapper.m_AM_Chute;
+        public InputAction @ChuteInstant => m_Wrapper.m_AM_ChuteInstant;
         public InputActionMap Get() { return m_Wrapper.m_AM; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -208,6 +230,9 @@ public class @Controles : IInputActionCollection, IDisposable
                 @Chute.started -= m_Wrapper.m_AMActionsCallbackInterface.OnChute;
                 @Chute.performed -= m_Wrapper.m_AMActionsCallbackInterface.OnChute;
                 @Chute.canceled -= m_Wrapper.m_AMActionsCallbackInterface.OnChute;
+                @ChuteInstant.started -= m_Wrapper.m_AMActionsCallbackInterface.OnChuteInstant;
+                @ChuteInstant.performed -= m_Wrapper.m_AMActionsCallbackInterface.OnChuteInstant;
+                @ChuteInstant.canceled -= m_Wrapper.m_AMActionsCallbackInterface.OnChuteInstant;
             }
             m_Wrapper.m_AMActionsCallbackInterface = instance;
             if (instance != null)
@@ -221,6 +246,9 @@ public class @Controles : IInputActionCollection, IDisposable
                 @Chute.started += instance.OnChute;
                 @Chute.performed += instance.OnChute;
                 @Chute.canceled += instance.OnChute;
+                @ChuteInstant.started += instance.OnChuteInstant;
+                @ChuteInstant.performed += instance.OnChuteInstant;
+                @ChuteInstant.canceled += instance.OnChuteInstant;
             }
         }
     }
@@ -230,5 +258,6 @@ public class @Controles : IInputActionCollection, IDisposable
         void OnDeplacement(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
         void OnChute(InputAction.CallbackContext context);
+        void OnChuteInstant(InputAction.CallbackContext context);
     }
 }

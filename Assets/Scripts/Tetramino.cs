@@ -8,7 +8,7 @@ public class Tetramino : MonoBehaviour
     private Controles Inputs;
     float lastFall = 0;
     private Coroutine coroutineChute;
-    private void OnEnable()
+    private void OnEnable()//Mise en place des contrôles
     {
         Inputs = new Controles();
         Inputs.Enable();
@@ -18,15 +18,14 @@ public class Tetramino : MonoBehaviour
         Inputs.AM.Chute.canceled += ChuteManuelleCanceled;
         Inputs.AM.ChuteInstant.performed += ChuteInstant;
     }
-
+    /// <summary>
+    /// Lance la coroutine de chute instantanée
+    /// </summary>
+    /// <param name="CBC"></param>
     private void ChuteInstant(InputAction.CallbackContext CBC)
     {
         StartCoroutine(CoroutineChuteInstant());
     }
-
-
-
-
     /// <summary>
     /// Déplace le tetramino à droite ou à gauche (le redéplace dans l'autre sens si la position est invalide)
     /// </summary>
@@ -53,6 +52,10 @@ public class Tetramino : MonoBehaviour
         else
             transform.Rotate(0, 0, -Rotation * 90);
     }
+   /// <summary>
+   /// Fait tomber le tetramino en boucle (grâce à la fonction chute) en attendant un temps donné entre chaque chute (la fonction chute s'arrête automatiquement en bas)
+   /// </summary>
+   /// <returns></returns>
     IEnumerator CoroutineChute()
     {
         while (true)
@@ -62,6 +65,10 @@ public class Tetramino : MonoBehaviour
         }
 
     }
+    /// <summary>
+    /// Fait tomber le tetramino en boucle (grâce à la fonction chute) jusqu'à atteindre le bas, où la fonction chute s'arrête automatiquement
+    /// </summary>
+    /// <returns></returns>
     IEnumerator CoroutineChuteInstant()
     {
         while (true)
@@ -71,7 +78,7 @@ public class Tetramino : MonoBehaviour
         }
     }
     /// <summary>
-    /// Pour descendre le tetramino d'un cran en bas (à implémenter: qu'on puisse maintenir le bouton)
+    /// Lance la coroutine de chute en boucle tant qu'on appuie sur le bouton
     /// </summary>
     /// <param name="CBC"></param>
     private void ChuteManuellePerformed(InputAction.CallbackContext CBC)
@@ -79,10 +86,18 @@ public class Tetramino : MonoBehaviour
         coroutineChute = StartCoroutine(CoroutineChute());
         Chute();
     }    
+    /// <summary>
+    /// Annule la coroutine de chute quand on arrête d'appuyer sur la touche de chute
+    /// </summary>
+    /// <param name="CBC"></param>
     private void ChuteManuelleCanceled(InputAction.CallbackContext CBC)
     {
         StopCoroutine(coroutineChute);
     }
+    /// <summary>
+    /// Descend le transform du Tetramino d'un cran en bas puis vérifie si la position est valide
+    /// Si elle ne l'est pas, remonte le Tetramino d'un cran, efface les lignes pleines, spawn la prochaine pièce et détruit ce script
+    /// </summary>
     private void Chute()
     {
         transform.position += Vector3.down;//On descend le transform d'un cran
@@ -95,7 +110,7 @@ public class Tetramino : MonoBehaviour
             transform.position += Vector3.up;
             Playfield.instance.DeleteFullRows();
             FindObjectOfType<Spawneur>().SpawnNext();
-            Destroy(this);
+            Destroy(this);//On détruit ce script pour éviter de contrôler plusieurs pièces à la fois
         }
     }
 

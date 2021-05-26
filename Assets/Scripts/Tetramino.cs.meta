@@ -3,7 +3,9 @@ guid: 963a6fa34cd47ec448e3a66743fec18a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - playfield: {fileID: 11400000, guid: f5b7580fea082ed48bc88862895827c8, type: 2}
+  - tempsAvantChuteAuto: {fileID: 11400000, guid: f8bdce448b50fff498658161eec9c633, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

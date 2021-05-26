@@ -8,6 +8,9 @@ public class Tetramino : MonoBehaviour
     private Controles Inputs;
     float lastFall = 0;
     private Coroutine coroutineChute;
+    [SerializeField] PlayfieldSO playfield;
+    [SerializeField] FloatVariable tempsAvantChuteAuto;
+    [SerializeField] TetraminoSO config;
     private void OnEnable()//Mise en place des contrôles
     {
         Inputs = new Controles();
@@ -60,7 +63,7 @@ public class Tetramino : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Playfield.instance.tempsAvantChuteManuelle);
+            yield return new WaitForSeconds(config.tempsAvantChuteManuelle);
             Chute();
         }
 
@@ -108,7 +111,7 @@ public class Tetramino : MonoBehaviour
         else
         {
             transform.position += Vector3.up;
-            Playfield.instance.DeleteFullRows();
+            playfield.DeleteFullRows();
             FindObjectOfType<Spawneur>().SpawnNext();
             Destroy(this);//On détruit ce script pour éviter de contrôler plusieurs pièces à la fois
         }
@@ -133,11 +136,11 @@ public class Tetramino : MonoBehaviour
     {
         foreach (Transform child in transform)//Pour chaque Transform dans le transform = pour chaque enfant
         {
-            Vector2 roundedPos = Playfield.instance.RoundVec2(child.position);//On arrondit la position de l’enfant pour la stocker dans roundedPos
-            if (!Playfield.instance.InsideBorder(roundedPos))
+            Vector2 roundedPos = playfield.RoundVec2(child.position);//On arrondit la position de l’enfant pour la stocker dans roundedPos
+            if (!playfield.InsideBorder(roundedPos))
                 return false;//Si la position de l’enfant n’est pas entre les bordures, on renvoie faux
-            if (Playfield.instance.grid[(int)roundedPos.x, (int)roundedPos.y] != null && //S’il y a qqch à x,y dans le tableau
-                Playfield.instance.grid[(int)roundedPos.x, (int)roundedPos.y].parent != transform) //Et si le parent de ce bloc n’est pas le même que le nôtre (pour qu’il puisse collisionner avec lui même))
+            if (playfield.grid[(int)roundedPos.x, (int)roundedPos.y] != null && //S’il y a qqch à x,y dans le tableau
+                playfield.grid[(int)roundedPos.x, (int)roundedPos.y].parent != transform) //Et si le parent de ce bloc n’est pas le même que le nôtre (pour qu’il puisse collisionner avec lui même))
                 return false;
         }
         return true; //Sinon, la position est valide
@@ -147,25 +150,25 @@ public class Tetramino : MonoBehaviour
    /// </summary>
     void UpdateGrid()
     {
-        for (int i = 0; i < Playfield.instance.h; i++)//On vérifie de haut en bas
+        for (int i = 0; i < playfield.h; i++)//On vérifie de haut en bas
         {
-            for (int j = 0; j < Playfield.instance.w; j++)//Et de gauche à droite
+            for (int j = 0; j < playfield.w; j++)//Et de gauche à droite
             {
-                if (Playfield.instance.grid[j, i] != null)//S’il y a qqch à i,j
-                    if (Playfield.instance.grid[j, i].parent == transform)//Et que le parent de ce qqch est le nôtre
-                        Playfield.instance.grid[j, i] = null;//On efface ce qu’il y a à cet endroit
+                if (playfield.grid[j, i] != null)//S’il y a qqch à i,j
+                    if (playfield.grid[j, i].parent == transform)//Et que le parent de ce qqch est le nôtre
+                        playfield.grid[j, i] = null;//On efface ce qu’il y a à cet endroit
             }
         }
         foreach (Transform child in transform)//Pour chaque Transform dans le transform = pour chaque enfant
         {
-            var roundedPos = Playfield.instance.RoundVec2(child.position);//On arrondit la position de l’enfant pour la stocker dans roundedPos
-            Playfield.instance.grid[(int)roundedPos.x, (int)roundedPos.y] = child;//On met le transform à cette position
+            var roundedPos = playfield.RoundVec2(child.position);//On arrondit la position de l’enfant pour la stocker dans roundedPos
+            playfield.grid[(int)roundedPos.x, (int)roundedPos.y] = child;//On met le transform à cette position
         }
     }
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - lastFall >= Playfield.instance.tempsAvantChuteAuto) //Si la différence entre le temps écoulé depuis le début du jeu et celui depuis la dernière chute est supérieur à la variable de chute automatique
+        if (Time.time - lastFall >= tempsAvantChuteAuto.value) //Si la différence entre le temps écoulé depuis le début du jeu et celui depuis la dernière chute est supérieur à la variable de chute automatique
         {
             Chute();//On descend automatiquement
             lastFall = Time.time;//on reset la variable contenant le temps depuis la dernière chute

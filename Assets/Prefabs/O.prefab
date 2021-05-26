@@ -296,6 +296,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 963a6fa34cd47ec448e3a66743fec18a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playfield: {fileID: 11400000, guid: f5b7580fea082ed48bc88862895827c8, type: 2}
+  tempsAvantChuteAuto: {fileID: 11400000, guid: f8bdce448b50fff498658161eec9c633, type: 2}
+  config: {fileID: 11400000, guid: 0449400e7bdeef6498d0d168b5881d4e, type: 2}
 --- !u!1 &8744768519124797074
 GameObject:
   m_ObjectHideFlags: 0

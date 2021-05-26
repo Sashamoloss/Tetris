@@ -1,29 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Playfield : MonoBehaviour
+[CreateAssetMenu(fileName="Playfield", menuName = "GameSO/Playfield")]
+public class PlayfieldSO : ScriptableObject
 {
-    public static Playfield instance;
     public int w = 10; //Largeur du Playfield
     public int h = 20; //Hauteur du Playfield
     public Transform[,] grid;
     public float tempsAvantChuteAuto;
     public float tempsAvantChuteManuelle;
-    
-    private void Awake()//Pour qu’il n’y ait qu’un seul Playfield par scène
-    {
-        if (instance != null)
-        { 
-            Destroy(this);
-        }
-        instance = this;
-    }
-    // Start is called before the first frame update
-    void Start()
+
+    private void OnEnable()
     {
         grid = new Transform[w, h];
     }
+
     /// <summary>
     /// Pour arrondir un vecteur (nécessaire avec les rotations)
     /// </summary>
@@ -57,11 +47,11 @@ public class Playfield : MonoBehaviour
     {
         for (int i = 0; i < w; i++)
         {
-            if (grid[i,y] !=null)
+            if (grid[i, y] != null)
             {
                 grid[i, y - 1] = grid[i, y]; //la case d’en dessous devient ce qu’il y avait au dessus
                 grid[i, y] = null; //on vide le dessus
-                grid[i, y - 1].position += Vector3.down; 
+                grid[i, y - 1].position += Vector3.down;
             }
         }
     }
@@ -83,7 +73,7 @@ public class Playfield : MonoBehaviour
     /// </summary>
     /// <param name="pos"></param>
     /// <returns>Le résultat du test logique demandant si pos est bien entre les bordures</returns>
-    public bool InsideBorder (Vector2 pos)
+    public bool InsideBorder(Vector2 pos)
     {
         return ((int)pos.x >= 0 && // on cast le float pos.x en int car on ne peut pas avoir d’index à virgule
                 (int)pos.x < w &&
@@ -95,21 +85,21 @@ public class Playfield : MonoBehaviour
     /// </summary>
     /// <param name="y"></param>
     /// <returns>Vrai si la ligne est pleine, faux si au moins une case est vide</returns>
-    public bool IsRowFull (int y)
+    public bool IsRowFull(int y)
     {
         for (int i = 0; i < w; i++)
         {
             if (grid[i, y] == null) //dès qu’un bloc est vide, la ligne n’est pas pleine et on peut arrêter de vérifier
-            { 
+            {
                 return false;
             }
-        }            
+        }
         return true;
     }
     /// <summary>
     /// Efface toutes les lignes pleines dans tout le Playfield
     /// </summary>
-    public void DeleteFullRows ()
+    public void DeleteFullRows()
     {
         for (int i = 0; i < h; i++)//De tout en bas jusqu’en haut
         {
@@ -120,31 +110,5 @@ public class Playfield : MonoBehaviour
                 --i;//On baisse i de un pour revérifier si la ligne est pleine
             }
         }
-    }
-    //debug
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.white;
-        if (grid == null)
-        {
-            return;
-        }
-        for (int i = 0; i < w; i++)
-        {
-            for (int j = 0; j < h; j++)
-            {
-                if (grid[i,j]!=null)
-                {
-                    Gizmos.DrawCube(grid[i, j].position, Vector3.one);
-                }
-                
-            }
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

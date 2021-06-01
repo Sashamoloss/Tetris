@@ -319,13 +319,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tetraminos:
-  - {fileID: 7295442104403650131, guid: 58c1553c7047f6c459ceca2fa57daea1, type: 3}
-  - {fileID: 6362079289790811909, guid: 11cae5fe18be49343a1bb8b89d86a275, type: 3}
-  - {fileID: 1584622895177866337, guid: e5004cdadb9b03242aa65ff6baae0d1a, type: 3}
-  - {fileID: 8744768519105645891, guid: 638edf7fbe2717048b04d5851f9fb792, type: 3}
-  - {fileID: 6983562443047571873, guid: 69520945e4fa5d741983b115c1d2aa15, type: 3}
-  - {fileID: 7714210686897250189, guid: 0d3e9edf3e27e2b4faaa8f61636310ee, type: 3}
-  - {fileID: 1082030517546412533, guid: f7c10b68dba4e6a4383050bf54eabc4d, type: 3}
+  - {fileID: 4617447264349479319, guid: 77b405b138799394b8cbb640ccc5e1c3, type: 3}
+  - {fileID: 4413265251657725336, guid: 246f4915dd21d6644ac813836297a5a1, type: 3}
+  - {fileID: 3617860056304455964, guid: 0598de33788844f409f00e9c022028c3, type: 3}
+  - {fileID: 3044708664054178648, guid: 2eb1d4a62a6631847a6edfc3c62782ff, type: 3}
+  - {fileID: 1949657999175543384, guid: 30c253085c8877e4e9f9d8786bb69b6c, type: 3}
+  - {fileID: 1033634861967551154, guid: 67b1e11ff8508f4498e7f5593a684ffb, type: 3}
+  - {fileID: 8676692143073831021, guid: 57aa2942b4b03e94db321e124715d7b8, type: 3}
 --- !u!4 &585675875
 Transform:
   m_ObjectHideFlags: 0

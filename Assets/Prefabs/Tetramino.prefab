@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7295442104403650132}
   - component: {fileID: 4876086616716497555}
+  - component: {fileID: 3702304638544846921}
+  - component: {fileID: 6113668678993052610}
   m_Layer: 0
   m_Name: Tetramino
   m_TagString: Untagged
@@ -46,3 +48,62 @@ MonoBehaviour:
   playfield: {fileID: 11400000, guid: f5b7580fea082ed48bc88862895827c8, type: 2}
   tempsAvantChuteAuto: {fileID: 11400000, guid: f8bdce448b50fff498658161eec9c633, type: 2}
   config: {fileID: 11400000, guid: 0449400e7bdeef6498d0d168b5881d4e, type: 2}
+--- !u!114 &3702304638544846921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7295442104403650131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: f25806a0d9a67ef4482f46cfe2290462, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fa1f2e79-c539-4667-b182-9be5cb8d9fba
+    m_ActionName: AM/Deplacement[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 688b0299-14e4-4a40-af94-30ccf5930e0b
+    m_ActionName: AM/Rotation[/Keyboard/q,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6a74b3a5-c63e-4b67-8b7b-667e8379103e
+    m_ActionName: AM/Chute[/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a2bbe689-4e20-4659-85ad-b2ee05beee97
+    m_ActionName: AM/ChuteInstant[/Keyboard/w]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: AM
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &6113668678993052610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7295442104403650131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681e5c1ee13c584429006f52989d8ae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playfield: {fileID: 11400000, guid: f5b7580fea082ed48bc88862895827c8, type: 2}

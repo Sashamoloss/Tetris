@@ -15,6 +15,44 @@ public class PlayfieldSO : ScriptableObject
     }
 
     /// <summary>
+    /// Vérifie que la position des blocs est entre les bordures et ne collisionne pas avec un autre Tétramino
+    /// </summary>
+    /// <returns></returns>
+    public bool IsValidGridPos(Transform transform)//on met le transform du tetramino en paramètre
+    {
+        foreach (Transform child in transform)//Pour chaque Transform dans le transform = pour chaque enfant
+        {
+            Vector2 roundedPos = RoundVec2(child.position);//On arrondit la position de l’enfant pour la stocker dans roundedPos
+            if (!InsideBorder(roundedPos))
+                return false;//Si la position de l’enfant n’est pas entre les bordures, on renvoie faux
+            if (grid[(int)roundedPos.x, (int)roundedPos.y] != null && //S’il y a qqch à x,y dans le tableau
+                grid[(int)roundedPos.x, (int)roundedPos.y].parent != transform) //Et si le parent de ce bloc n’est pas le même que le nôtre (pour qu’il puisse collisionner avec lui même))
+                return false;
+        }
+        return true; //Sinon, la position est valide
+    }
+    /// <summary>
+    /// Vérifie que chaque bloc est à la bonne place et est bien lié à son tetramino
+    /// </summary>
+    public void UpdateGrid(Transform transform)
+    {
+        for (int i = 0; i < h; i++)//On vérifie de haut en bas
+        {
+            for (int j = 0; j < w; j++)//Et de gauche à droite
+            {
+                if (grid[j, i] != null)//S’il y a qqch à i,j
+                    if (grid[j, i].parent == transform)//Et que le parent de ce qqch est le nôtre
+                        grid[j, i] = null;//On efface ce qu’il y a à cet endroit
+            }
+        }
+        foreach (Transform child in transform)//Pour chaque Transform dans le transform = pour chaque enfant
+        {
+            var roundedPos = RoundVec2(child.position);//On arrondit la position de l’enfant pour la stocker dans roundedPos
+            grid[(int)roundedPos.x, (int)roundedPos.y] = child;//On met le transform à cette position
+        }
+    }
+
+    /// <summary>
     /// Pour arrondir un vecteur (nécessaire avec les rotations)
     /// </summary>
     /// <param name="v"></param>

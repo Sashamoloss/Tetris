@@ -78,8 +78,8 @@ public class PlayfieldSO : ScriptableObject
         {
             Destroy(grid[i, y].gameObject);
             grid[i, y] = null;
-            rowCompleted.Invoke(pointsPerRow); //On invoque l'événement de ligne complétée pour le score
         }
+        rowCompleted.Invoke(pointsPerRow); //On invoque l'événement de ligne complétée pour le score
     }
 
     /// <summary>

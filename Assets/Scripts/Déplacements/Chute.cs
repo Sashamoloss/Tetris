@@ -26,6 +26,7 @@ public class Chute : MonoBehaviour
             transform.position += Vector3.up;
             playfield.DeleteFullRows();
             FindObjectOfType<Spawneur>().SpawnNext();
+            GetComponent<PlayerInput>().enabled = false;
             Destroy(this);//On détruit ce script pour éviter de contrôler plusieurs pièces à la fois
             //à faire: détruire les autres scripts qui contrôlent le tetramino (?)
         }
@@ -60,27 +61,28 @@ public class Chute : MonoBehaviour
     /// Lance la coroutine de chute instantanée
     /// </summary>
     /// <param name="CBC"></param>
-    private void ChuteInstant(InputAction.CallbackContext CBC)
+    public void ChuteInstant(InputAction.CallbackContext CBC)
     {
-        StartCoroutine(CoroutineChuteInstant());
+        if (CBC.phase == InputActionPhase.Performed)
+            StartCoroutine(CoroutineChuteInstant());
     }
     /// <summary>
-    /// Lance la coroutine de chute en boucle tant qu'on appuie sur le bouton
+    /// Lance la coroutine de chute en boucle tant qu'on appuie sur le bouton, l'arrête si on n'appuie plus
     /// </summary>
     /// <param name="CBC"></param>
-    private void ChuteManuellePerformed(InputAction.CallbackContext CBC)
+    public void ChuteManuelle(InputAction.CallbackContext CBC)
     {
-        coroutineChute = StartCoroutine(CoroutineChute());
-        FonctionChute();
+        if (CBC.phase == InputActionPhase.Performed)
+        {
+            coroutineChute = StartCoroutine(CoroutineChute());
+            FonctionChute();
+        }
+        else if (CBC.phase == InputActionPhase.Canceled)
+        {
+            StopCoroutine(coroutineChute);
+        }
     }
-    /// <summary>
-    /// Annule la coroutine de chute quand on arrête d'appuyer sur la touche de chute
-    /// </summary>
-    /// <param name="CBC"></param>
-    private void ChuteManuelleCanceled(InputAction.CallbackContext CBC)
-    {
-        StopCoroutine(coroutineChute);
-    }
+
 
     // Update is called once per frame
     void Update()

@@ -5,19 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Tetramino : MonoBehaviour
 {
-    private Controles Inputs;
     [SerializeField] PlayfieldSO playfield;
-    private void OnEnable()//Mise en place des contrôles
-    {
-        Inputs = new Controles();
-        Inputs.Enable();
-        //Inputs.AM.Deplacement.performed += DeplacementLateral;
-        //Inputs.AM.Rotation.performed += Rotation;
-    }
-
-
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -29,14 +17,5 @@ public class Tetramino : MonoBehaviour
             Debug.Log("GAME OVER");
             Destroy(gameObject);
         }
-    }
-
-
-    /// <summary>
-    /// Désactive les inputs à la désactivation du script (pour éviter des bugs ?)
-    /// </summary>
-    private void OnDisable()
-    {
-        Inputs.Disable();
     }
 }

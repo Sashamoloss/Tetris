@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f364188e99ff7f240b31fd689c5f9fb9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - playfield: {fileID: 11400000, guid: f5b7580fea082ed48bc88862895827c8, type: 2}
+  - tempsAvantChuteAuto: {fileID: 11400000, guid: f8bdce448b50fff498658161eec9c633, type: 2}
+  - config: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

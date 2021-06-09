@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName="Playfield", menuName = "GameSO/Playfield")]
 public class PlayfieldSO : ScriptableObject
@@ -8,6 +9,9 @@ public class PlayfieldSO : ScriptableObject
     public Transform[,] grid;
     public float tempsAvantChuteAuto;
     public float tempsAvantChuteManuelle;
+    public IntVariable totalScore;
+    public IntVariable pointsPerRow;
+    public Int_Event rowCompleted;
 
     private void OnEnable()
     {
@@ -74,6 +78,7 @@ public class PlayfieldSO : ScriptableObject
         {
             Destroy(grid[i, y].gameObject);
             grid[i, y] = null;
+            rowCompleted.Invoke(pointsPerRow); //On invoque l'événement de ligne complétée pour le score
         }
     }
 

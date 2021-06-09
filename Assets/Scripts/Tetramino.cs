@@ -11,36 +11,12 @@ public class Tetramino : MonoBehaviour
     {
         Inputs = new Controles();
         Inputs.Enable();
-        Inputs.AM.Deplacement.performed += DeplacementLateral;
-        Inputs.AM.Rotation.performed += Rotation;
+        //Inputs.AM.Deplacement.performed += DeplacementLateral;
+        //Inputs.AM.Rotation.performed += Rotation;
     }
 
-    /// <summary>
-    /// Déplace le tetramino à droite ou à gauche (le redéplace dans l'autre sens si la position est invalide)
-    /// </summary>
-    /// <param name="CBC"></param>
-    private void DeplacementLateral(InputAction.CallbackContext CBC)
-    {
-        var Direction = CBC.ReadValue<float>();
-        transform.position += new Vector3(Direction, 0, 0);
-        if (playfield.IsValidGridPos(transform))
-            playfield.UpdateGrid(transform);
-        else
-            transform.position += new Vector3(-Direction, 0, 0);
-    }
-    /// <summary>
-    /// Pour tourner le tetramino à droite ou à gauche (le retourne dans l'autre sens si la position est invalide)
-    /// </summary>
-    /// <param name="CBC"></param>
-    private void Rotation(InputAction.CallbackContext CBC)
-    {
-        var Rotation = CBC.ReadValue<float>();
-        transform.Rotate (0, 0, Rotation*90);
-        if (playfield.IsValidGridPos(transform))
-            playfield.UpdateGrid(transform);
-        else
-            transform.Rotate(0, 0, -Rotation * 90);
-    }
+
+
 
 
     // Start is called before the first frame update

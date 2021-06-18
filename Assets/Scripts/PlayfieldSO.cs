@@ -4,14 +4,16 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName="Playfield", menuName = "GameSO/Playfield")]
 public class PlayfieldSO : ScriptableObject
 {
-    public int w = 10; //Largeur du Playfield
-    public int h = 20; //Hauteur du Playfield
-    public Transform[,] grid;
-    public float tempsAvantChuteAuto;
-    public float tempsAvantChuteManuelle;
-    public IntVariable totalScore;
-    public IntVariable pointsPerRow;
-    public Int_Event rowCompleted;
+    [SerializeField] private int w = 10; //Largeur du Playfield
+    [SerializeField] private int h = 30; //Hauteur du Playfield
+    [SerializeField] private UnityEvent rowCompleted;
+    private Vector2 playfieldPosition;
+    private Transform[,] grid;
+    
+    public void Init(Transform playfieldOrigin)
+    {
+        playfieldPosition = RoundVec2(playfieldOrigin.position);
+    }
 
     private void OnEnable()
     {
@@ -26,7 +28,7 @@ public class PlayfieldSO : ScriptableObject
     {
         foreach (Transform child in transform)//Pour chaque Transform dans le transform = pour chaque enfant
         {
-            Vector2 roundedPos = RoundVec2(child.position);//On arrondit la position de l’enfant pour la stocker dans roundedPos
+            Vector2 roundedPos = RoundOffsetVec2(child.position);//On arrondit la position de l’enfant pour la stocker dans roundedPos
             if (!InsideBorder(roundedPos))
                 return false;//Si la position de l’enfant n’est pas entre les bordures, on renvoie faux
             if (grid[(int)roundedPos.x, (int)roundedPos.y] != null && //S’il y a qqch à x,y dans le tableau
@@ -51,7 +53,7 @@ public class PlayfieldSO : ScriptableObject
         }
         foreach (Transform child in transform)//Pour chaque Transform dans le transform = pour chaque enfant
         {
-            var roundedPos = RoundVec2(child.position);//On arrondit la position de l’enfant pour la stocker dans roundedPos
+            var roundedPos = RoundOffsetVec2(child.position);//On arrondit la position de l’enfant pour la stocker dans roundedPos
             grid[(int)roundedPos.x, (int)roundedPos.y] = child;//On met le transform à cette position
         }
     }
@@ -67,6 +69,11 @@ public class PlayfieldSO : ScriptableObject
                            Mathf.Round(v.y));
     }
 
+    public Vector2 RoundOffsetVec2(Vector2 v)
+    {
+        return RoundVec2(v) - playfieldPosition;
+    }
+
     /// <summary>
     /// Supprime chaque bloc de la ligne y
     /// </summary>
@@ -79,7 +86,7 @@ public class PlayfieldSO : ScriptableObject
             Destroy(grid[i, y].gameObject);
             grid[i, y] = null;
         }
-        rowCompleted.Invoke(pointsPerRow); //On invoque l'événement de ligne complétée pour le score
+        rowCompleted.Invoke(); //On invoque l'événement de ligne complétée pour le score
     }
 
     /// <summary>

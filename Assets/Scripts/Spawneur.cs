@@ -5,9 +5,11 @@ using UnityEngine;
 public class Spawneur : MonoBehaviour
 {
     [SerializeField] private GameObject[] tetraminos;
+    [SerializeField] private PlayfieldSO playfield;
     // Start is called before the first frame update
     void Start()
     {
+        playfield.Init(transform.parent);
         SpawnNext();
     }
 
@@ -18,6 +20,6 @@ public class Spawneur : MonoBehaviour
     public void SpawnNext()
     {
         int i = Random.Range(0, tetraminos.Length);
-        Instantiate(tetraminos[i], transform.position, Quaternion.identity);
+        Instantiate(tetraminos[i], transform.position, Quaternion.identity,transform.parent);
     }
 }

@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: MainPlayfield
   m_EditorClassIdentifier: 
   w: 10
-  h: 20
+  h: 30
   tempsAvantChuteAuto: 1
   tempsAvantChuteManuelle: 0.1
-  totalScore: {fileID: 0}
-  pointsPerRow: {fileID: 11400000, guid: 0768c89eb02419c46a8b3a71c022d509, type: 2}
+  pointsPerRow: 5
   rowCompleted:
     m_PersistentCalls:
       m_Calls:

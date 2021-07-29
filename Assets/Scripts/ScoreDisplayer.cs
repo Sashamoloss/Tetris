@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class ScoreDisplayer : MonoBehaviour
 {
-    public IntVariable pointsPerRow;
-    private int totalScore;
+    public IntVariable totalScore;
     private TextMeshProUGUI txtMeshPro;
     // Start is called before the first frame update
     void Start()
@@ -15,8 +14,7 @@ public class ScoreDisplayer : MonoBehaviour
     }
     public void UpdateScore()
     {
-        totalScore += pointsPerRow.value;
-        txtMeshPro.text = totalScore.ToString();
+        txtMeshPro.text = totalScore.value.ToString();
     }
 
 }

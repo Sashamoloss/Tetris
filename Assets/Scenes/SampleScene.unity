@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04cbd62a68acb5e4cbd73d2e6568a76d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameEvent: {fileID: 11400000, guid: 738e199cb6524094eb3b3b087119791c, type: 2}
+  GameEvent: {fileID: 11400000, guid: ee0e3ef0cd7625d46bd71fb54a63dff7, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -433,7 +433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44678411575b2524ca2de43336e8371d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsPerRow: {fileID: 11400000, guid: f40186c6b47aeef478851390b8c05e49, type: 2}
+  totalScore: {fileID: 11400000, guid: e8163fbc4d9a47047aa3b41dedf37334, type: 2}
 --- !u!1 &322307726
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,7 +835,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 100}
+  m_SizeDelta: {x: 0, y: 130}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1319039578
 GameObject:
@@ -1093,4 +1093,83 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1979298972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1979298975}
+  - component: {fileID: 1979298974}
+  - component: {fileID: 1979298973}
+  m_Layer: 0
+  m_Name: ScoreCalculator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1979298973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979298972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cbd62a68acb5e4cbd73d2e6568a76d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 3198c8b6bccc99446abdaa73776a9796, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1979298974}
+        m_TargetAssemblyTypeName: ScoreCalculator, Assembly-CSharp
+        m_MethodName: OnSuddenDropCompleted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1979298974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979298972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38fa9cd032c481d4e9e6c4d43eeb1c54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalScore: {fileID: 11400000, guid: e8163fbc4d9a47047aa3b41dedf37334, type: 2}
+  pointsPerRow: {fileID: 11400000, guid: f40186c6b47aeef478851390b8c05e49, type: 2}
+  pointsPerTetris: {fileID: 11400000, guid: e2454958666aef14a923ee407646e459, type: 2}
+  pointsPerSuddenDrop: {fileID: 11400000, guid: 6cb5447472488f64ab78d7319eed35b4, type: 2}
+  pointsPerSecondSoftDrop: {fileID: 11400000, guid: 06f7b4859ae932d49b113bbc45886cd2, type: 2}
+  config: {fileID: 11400000, guid: 0449400e7bdeef6498d0d168b5881d4e, type: 2}
+  onScoreChanged: {fileID: 11400000, guid: ee0e3ef0cd7625d46bd71fb54a63dff7, type: 2}
+--- !u!4 &1979298975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979298972}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.8170795, y: 10.559278, z: -0.031196594}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -135,6 +135,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 3198c8b6bccc99446abdaa73776a9796, type: 2}
+        m_TargetAssemblyTypeName: GameEventSO, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a2bbe689-4e20-4659-85ad-b2ee05beee97
     m_ActionName: AM/ChuteInstant[/Keyboard/w]
   m_NeverAutoSwitchControlSchemes: 0
@@ -155,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playfield: {fileID: 11400000, guid: f5b7580fea082ed48bc88862895827c8, type: 2}
-  tempsAvantChuteAuto: {fileID: 11400000, guid: f8bdce448b50fff498658161eec9c633, type: 2}
+  tempsAvantChuteAuto: {fileID: 11400000, guid: 443f5dc124b19f047a2a4a15b4844a07, type: 2}
   config: {fileID: 11400000, guid: 0449400e7bdeef6498d0d168b5881d4e, type: 2}
 --- !u!114 &-5278839440622672733
 MonoBehaviour:

@@ -38,6 +38,7 @@ public class ScoreCalculator : MonoBehaviour
     public void OnSuddenDropCompleted()
     {
         AddToScore(pointsPerSuddenDrop.value);
+        //Debug.Log("Sudden Drop");
     }
     public void OnSoftDropStarted()
     {

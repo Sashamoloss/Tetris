@@ -19,6 +19,10 @@ public class GameEventSO : ScriptableObject
 
     public void Raise()
     {
+        if (name== "ChuteInstantEvent")
+        {
+            Debug.Log("slt");
+        }
         for (int i = listeners.Count - 1; i >= 0; --i)
         {
             listeners[i].RaiseEvent();

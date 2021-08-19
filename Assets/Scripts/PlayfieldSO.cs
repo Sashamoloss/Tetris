@@ -7,6 +7,7 @@ public class PlayfieldSO : ScriptableObject
     [SerializeField] private int w = 10; //Largeur du Playfield
     [SerializeField] private int h = 30; //Hauteur du Playfield
     [SerializeField] private UnityEvent rowCompleted;
+    [SerializeField] private UnityEvent suddenDrop;
     private Vector2 playfieldPosition;
     private Transform[,] grid;
     

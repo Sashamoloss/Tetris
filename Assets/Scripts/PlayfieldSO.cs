@@ -8,6 +8,7 @@ public class PlayfieldSO : ScriptableObject
     [SerializeField] private int h = 30; //Hauteur du Playfield
     [SerializeField] private UnityEvent rowCompleted;
     [SerializeField] private UnityEvent suddenDrop;
+    [SerializeField] GameEventSO tetrisEvent;
     private Vector2 playfieldPosition;
     private Transform[,] grid;
     
@@ -87,7 +88,6 @@ public class PlayfieldSO : ScriptableObject
             Destroy(grid[i, y].gameObject);
             grid[i, y] = null;
         }
-        rowCompleted.Invoke(); //On invoque l'événement de ligne complétée pour le score
     }
 
     /// <summary>
@@ -152,13 +152,24 @@ public class PlayfieldSO : ScriptableObject
     /// </summary>
     public void DeleteFullRows()
     {
+        var rowsCounter = 0;
         for (int i = 0; i < h; i++)//De tout en bas jusqu’en haut
         {
             if (IsRowFull(i))//Si la ligne est pleine
             {
+                rowsCounter++;//On incrémente le compteur de lignes pour savoir si on fait un Tetris
                 DeleteRow(i);//On l’efface
                 DecreaseRowsAbove(i + 1);//On baisse toutes les lignes au dessus de celle qu’on vient d’effacer
                 --i;//On baisse i de un pour revérifier si la ligne est pleine
+            }
+        }
+        if (rowsCounter == 4)
+            tetrisEvent.Raise();
+        else
+        { 
+            for (int i = 0; i < rowsCounter; i++)
+            {
+                rowCompleted.Invoke();
             }
         }
     }

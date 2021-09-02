@@ -10,6 +10,9 @@ public class Chute : MonoBehaviour
     [SerializeField] PlayfieldSO playfield;
     [SerializeField] FloatVariable tempsAvantChuteAuto;
     [SerializeField] TetraminoSO config;
+    [SerializeField] GameEventSO startSoftDrop;
+    [SerializeField] GameEventSO stopSoftDrop;
+    [SerializeField] GameEventSO suddenDrop;
     /// <summary>
     /// Descend le transform du Tetramino d'un cran en bas puis vérifie si la position est valide
     /// Si elle ne l'est pas, remonte le Tetramino d'un cran, efface les lignes pleines, spawn la prochaine pièce et détruit ce script
@@ -64,7 +67,10 @@ public class Chute : MonoBehaviour
     public void ChuteInstant(InputAction.CallbackContext CBC)
     {
         if (CBC.phase == InputActionPhase.Performed)
+        {
             StartCoroutine(CoroutineChuteInstant());
+            suddenDrop.Raise();
+        }
     }
     /// <summary>
     /// Lance la coroutine de chute en boucle tant qu'on appuie sur le bouton, l'arrête si on n'appuie plus
@@ -76,10 +82,12 @@ public class Chute : MonoBehaviour
         {
             coroutineChute = StartCoroutine(CoroutineChute());
             FonctionChute();
+            startSoftDrop.Raise();
         }
         else if (CBC.phase == InputActionPhase.Canceled)
         {
             StopCoroutine(coroutineChute);
+            stopSoftDrop.Raise();
         }
     }
 
@@ -92,5 +100,9 @@ public class Chute : MonoBehaviour
             FonctionChute();//On descend automatiquement
             lastFall = Time.time;//on reset la variable contenant le temps depuis la dernière chute
         }
+    }
+    private void OnDestroy()
+    {
+        StopAllCoroutines();//On arrête toutes les coroutines à la destruction du script
     }
 }

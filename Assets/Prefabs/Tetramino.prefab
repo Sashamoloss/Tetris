@@ -157,6 +157,9 @@ MonoBehaviour:
   playfield: {fileID: 11400000, guid: f5b7580fea082ed48bc88862895827c8, type: 2}
   tempsAvantChuteAuto: {fileID: 11400000, guid: 443f5dc124b19f047a2a4a15b4844a07, type: 2}
   config: {fileID: 11400000, guid: 0449400e7bdeef6498d0d168b5881d4e, type: 2}
+  startSoftDrop: {fileID: 11400000, guid: ffada5dff14a416439c66c76a8379e63, type: 2}
+  stopSoftDrop: {fileID: 11400000, guid: 2dae85f51bc822743938343044bcb596, type: 2}
+  suddenDrop: {fileID: 11400000, guid: 3198c8b6bccc99446abdaa73776a9796, type: 2}
 --- !u!114 &-5278839440622672733
 MonoBehaviour:
   m_ObjectHideFlags: 0

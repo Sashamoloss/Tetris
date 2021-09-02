@@ -631,12 +631,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tetraminos:
   - {fileID: 4617447264349479319, guid: 77b405b138799394b8cbb640ccc5e1c3, type: 3}
-  - {fileID: 4413265251657725336, guid: 246f4915dd21d6644ac813836297a5a1, type: 3}
-  - {fileID: 3617860056304455964, guid: 0598de33788844f409f00e9c022028c3, type: 3}
-  - {fileID: 3044708664054178648, guid: 2eb1d4a62a6631847a6edfc3c62782ff, type: 3}
-  - {fileID: 1949657999175543384, guid: 30c253085c8877e4e9f9d8786bb69b6c, type: 3}
-  - {fileID: 1033634861967551154, guid: 67b1e11ff8508f4498e7f5593a684ffb, type: 3}
-  - {fileID: 8676692143073831021, guid: 57aa2942b4b03e94db321e124715d7b8, type: 3}
   playfield: {fileID: 11400000, guid: f5b7580fea082ed48bc88862895827c8, type: 2}
 --- !u!4 &585675875
 Transform:
@@ -1108,6 +1102,7 @@ GameObject:
   - component: {fileID: 1979298977}
   - component: {fileID: 1979298976}
   - component: {fileID: 1979298978}
+  - component: {fileID: 1979298979}
   m_Layer: 0
   m_Name: ScoreCalculator
   m_TagString: Untagged
@@ -1251,6 +1246,34 @@ MonoBehaviour:
       - m_Target: {fileID: 1979298974}
         m_TargetAssemblyTypeName: ScoreCalculator, Assembly-CSharp
         m_MethodName: OnRowCompleted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1979298979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979298972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cbd62a68acb5e4cbd73d2e6568a76d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 794897a6b9de4f64bba795cf7485d679, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1979298974}
+        m_TargetAssemblyTypeName: ScoreCalculator, Assembly-CSharp
+        m_MethodName: OnTetrisCompleted
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

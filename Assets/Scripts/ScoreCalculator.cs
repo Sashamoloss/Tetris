@@ -10,7 +10,7 @@ public class ScoreCalculator : MonoBehaviour
     public IntVariable pointsPerSuddenDrop;
     public IntVariable pointsPerSecondSoftDrop;
     public TetraminoSO config;
-    public GameEventSO onScoreChanged;
+    [Header("Event")]public GameEventSO onScoreChanged;
     private Coroutine coroutinePointsPerSoftDrop;
 
     // Start is called before the first frame update

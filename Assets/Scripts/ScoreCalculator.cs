@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ScoreCalculator : MonoBehaviour
 {
-    public IntVariable totalScore;
+    public TetraminoSO config;
+    [Header("Variables")] public IntVariable totalScore;
     public IntVariable pointsPerRow;
     public IntVariable pointsPerTetris;
     public IntVariable pointsPerSuddenDrop;
     public IntVariable pointsPerSecondSoftDrop;
-    public TetraminoSO config;
-    [Header("Event")]public GameEventSO onScoreChanged;
+    [Header("Event")] public GameEventSO onScoreChanged;
     private Coroutine coroutinePointsPerSoftDrop;
 
     // Start is called before the first frame update
@@ -48,7 +48,7 @@ public class ScoreCalculator : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(config.tempsAvantChuteManuelle);
+            yield return new WaitForSeconds(config.timeBeforeSoftDrop);
             AddToScore(pointsPerSecondSoftDrop.value);
         }
     }

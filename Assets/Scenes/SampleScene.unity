@@ -631,6 +631,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tetraminos:
   - {fileID: 4617447264349479319, guid: 77b405b138799394b8cbb640ccc5e1c3, type: 3}
+  - {fileID: 4413265251657725336, guid: 246f4915dd21d6644ac813836297a5a1, type: 3}
+  - {fileID: 3617860056304455964, guid: 0598de33788844f409f00e9c022028c3, type: 3}
+  - {fileID: 3044708664054178648, guid: 2eb1d4a62a6631847a6edfc3c62782ff, type: 3}
+  - {fileID: 1949657999175543384, guid: 30c253085c8877e4e9f9d8786bb69b6c, type: 3}
+  - {fileID: 1033634861967551154, guid: 67b1e11ff8508f4498e7f5593a684ffb, type: 3}
+  - {fileID: 8676692143073831021, guid: 57aa2942b4b03e94db321e124715d7b8, type: 3}
+  tetraminosDebug:
+  - {fileID: 4617447264349479319, guid: 77b405b138799394b8cbb640ccc5e1c3, type: 3}
+  isInDebug: {fileID: 11400000, guid: f84aa4c2d2e775145a140a1258686f7c, type: 2}
   playfield: {fileID: 11400000, guid: f5b7580fea082ed48bc88862895827c8, type: 2}
 --- !u!4 &585675875
 Transform:
@@ -1088,6 +1097,225 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1446629277
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1446629279}
+  - component: {fileID: 1446629278}
+  m_Layer: 0
+  m_Name: Debug Manager
+  m_TagString: EditorOnly
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1446629278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446629277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: f25806a0d9a67ef4482f46cfe2290462, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fa1f2e79-c539-4667-b182-9be5cb8d9fba
+    m_ActionName: AM/Deplacement[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 688b0299-14e4-4a40-af94-30ccf5930e0b
+    m_ActionName: AM/Rotation[/Keyboard/q,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6a74b3a5-c63e-4b67-8b7b-667e8379103e
+    m_ActionName: AM/Chute[/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a2bbe689-4e20-4659-85ad-b2ee05beee97
+    m_ActionName: AM/ChuteInstant[/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: f84aa4c2d2e775145a140a1258686f7c, type: 2}
+        m_TargetAssemblyTypeName: BoolVariable, Assembly-CSharp
+        m_MethodName: Switch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0d9b3beb-f4d2-43f0-99bd-073f1ee38182
+    m_ActionName: Debug/Debug Toggle[/Keyboard/enter]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Debug
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!4 &1446629279
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446629277}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1569016800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1569016804}
+  - component: {fileID: 1569016803}
+  - component: {fileID: 1569016802}
+  - component: {fileID: 1569016801}
+  m_Layer: 0
+  m_Name: Difficulty Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1569016801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569016800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cbd62a68acb5e4cbd73d2e6568a76d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: b6be2b22d3d591f428de9a4186898814, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1569016803}
+        m_TargetAssemblyTypeName: TimeManager, Assembly-CSharp
+        m_MethodName: OnRowCompleted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1569016802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569016800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cbd62a68acb5e4cbd73d2e6568a76d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 794897a6b9de4f64bba795cf7485d679, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1569016803}
+        m_TargetAssemblyTypeName: TimeManager, Assembly-CSharp
+        m_MethodName: OnTetrisCompleted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1569016803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569016800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478f0edc68bb93646b9797ac83687744, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBeforeAutoDrop: {fileID: 0}
+  test:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.22628011
+      outSlope: -0.22628011
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.5437628
+    - serializedVersion: 3
+      time: 1
+      value: 0.4
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1569016804
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569016800}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.046453, y: 9.6870775, z: -0.09001346}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1979298972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,12 +1378,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38fa9cd032c481d4e9e6c4d43eeb1c54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: 0449400e7bdeef6498d0d168b5881d4e, type: 2}
   totalScore: {fileID: 11400000, guid: e8163fbc4d9a47047aa3b41dedf37334, type: 2}
   pointsPerRow: {fileID: 11400000, guid: f40186c6b47aeef478851390b8c05e49, type: 2}
   pointsPerTetris: {fileID: 11400000, guid: e2454958666aef14a923ee407646e459, type: 2}
   pointsPerSuddenDrop: {fileID: 11400000, guid: 6cb5447472488f64ab78d7319eed35b4, type: 2}
   pointsPerSecondSoftDrop: {fileID: 11400000, guid: 06f7b4859ae932d49b113bbc45886cd2, type: 2}
-  config: {fileID: 11400000, guid: 0449400e7bdeef6498d0d168b5881d4e, type: 2}
   onScoreChanged: {fileID: 11400000, guid: ee0e3ef0cd7625d46bd71fb54a63dff7, type: 2}
 --- !u!4 &1979298975
 Transform:
@@ -1165,7 +1393,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1979298972}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.8170795, y: 10.559278, z: -0.031196594}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

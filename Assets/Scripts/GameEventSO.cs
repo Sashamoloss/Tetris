@@ -19,7 +19,7 @@ public class GameEventSO : ScriptableObject
 
     public void Raise()
     {
-        if (name== "ChuteInstantEvent")
+        if (name== "SoftDropEvent")
         {
             Debug.Log("slt");
         }

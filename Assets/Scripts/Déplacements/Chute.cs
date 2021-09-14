@@ -8,7 +8,7 @@ public class Chute : MonoBehaviour
     float lastFall = 0;
     private Coroutine coroutineChute;
     [SerializeField] PlayfieldSO playfield;
-    [SerializeField] FloatVariable tempsAvantChuteAuto;
+    [SerializeField] FloatVariable timeBeforeAutoDrop;
     [SerializeField] TetraminoSO config;
     [SerializeField] GameEventSO startSoftDrop;
     [SerializeField] GameEventSO stopSoftDrop;
@@ -43,7 +43,7 @@ public class Chute : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(config.tempsAvantChuteManuelle);
+            yield return new WaitForSeconds(config.timeBeforeSoftDrop);
             FonctionChute();
         }
 
@@ -52,7 +52,7 @@ public class Chute : MonoBehaviour
     /// Fait tomber le tetramino en boucle (grâce à la fonction chute) jusqu'à atteindre le bas, où la fonction chute s'arrête automatiquement
     /// </summary>
     /// <returns></returns>
-    IEnumerator CoroutineChuteInstant()
+    IEnumerator CoroutineSuddenDrop()
     {
         while (true)
         {
@@ -64,11 +64,11 @@ public class Chute : MonoBehaviour
     /// Lance la coroutine de chute instantanée
     /// </summary>
     /// <param name="CBC"></param>
-    public void ChuteInstant(InputAction.CallbackContext CBC)
+    public void SuddenDrop(InputAction.CallbackContext CBC)
     {
         if (CBC.phase == InputActionPhase.Performed)
         {
-            StartCoroutine(CoroutineChuteInstant());
+            StartCoroutine(CoroutineSuddenDrop());
             suddenDrop.Raise();
         }
     }
@@ -76,7 +76,7 @@ public class Chute : MonoBehaviour
     /// Lance la coroutine de chute en boucle tant qu'on appuie sur le bouton, l'arrête si on n'appuie plus
     /// </summary>
     /// <param name="CBC"></param>
-    public void ChuteManuelle(InputAction.CallbackContext CBC)
+    public void SoftDrop(InputAction.CallbackContext CBC)
     {
         if (CBC.phase == InputActionPhase.Performed)
         {
@@ -95,7 +95,7 @@ public class Chute : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - lastFall >= tempsAvantChuteAuto.value) //Si la différence entre le temps écoulé depuis le début du jeu et celui depuis la dernière chute est supérieur à la variable de chute automatique
+        if (Time.time - lastFall >= timeBeforeAutoDrop.value) //Si la différence entre le temps écoulé depuis le début du jeu et celui depuis la dernière chute est supérieur à la variable de chute automatique
         {
             FonctionChute();//On descend automatiquement
             lastFall = Time.time;//on reset la variable contenant le temps depuis la dernière chute

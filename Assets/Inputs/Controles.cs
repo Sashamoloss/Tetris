@@ -141,6 +141,33 @@ public class @Controles : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""c59359cb-eeed-4aed-bd2d-208200d4ca1b"",
+            ""actions"": [
+                {
+                    ""name"": ""Debug Toggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""0d9b3beb-f4d2-43f0-99bd-073f1ee38182"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""d625fe5e-63c4-4298-a56d-4037e4abf0c1"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Debug Toggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -151,6 +178,9 @@ public class @Controles : IInputActionCollection, IDisposable
         m_AM_Rotation = m_AM.FindAction("Rotation", throwIfNotFound: true);
         m_AM_Chute = m_AM.FindAction("Chute", throwIfNotFound: true);
         m_AM_ChuteInstant = m_AM.FindAction("ChuteInstant", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_DebugToggle = m_Debug.FindAction("Debug Toggle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -253,11 +283,48 @@ public class @Controles : IInputActionCollection, IDisposable
         }
     }
     public AMActions @AM => new AMActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private IDebugActions m_DebugActionsCallbackInterface;
+    private readonly InputAction m_Debug_DebugToggle;
+    public struct DebugActions
+    {
+        private @Controles m_Wrapper;
+        public DebugActions(@Controles wrapper) { m_Wrapper = wrapper; }
+        public InputAction @DebugToggle => m_Wrapper.m_Debug_DebugToggle;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void SetCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterface != null)
+            {
+                @DebugToggle.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnDebugToggle;
+                @DebugToggle.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnDebugToggle;
+                @DebugToggle.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnDebugToggle;
+            }
+            m_Wrapper.m_DebugActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @DebugToggle.started += instance.OnDebugToggle;
+                @DebugToggle.performed += instance.OnDebugToggle;
+                @DebugToggle.canceled += instance.OnDebugToggle;
+            }
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
     public interface IAMActions
     {
         void OnDeplacement(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
         void OnChute(InputAction.CallbackContext context);
         void OnChuteInstant(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnDebugToggle(InputAction.CallbackContext context);
     }
 }

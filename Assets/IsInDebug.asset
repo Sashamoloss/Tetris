@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ab953e899188c94995e2cbf71f0fd24, type: 3}
-  m_Name: TempsAvantChuteAuto 1
+  m_Script: {fileID: 11500000, guid: b9b9d0aa3fa3e9b4fbe20909fcf950b4, type: 3}
+  m_Name: IsInDebug
   m_EditorClassIdentifier: 
-  value: 1
+  value: 0

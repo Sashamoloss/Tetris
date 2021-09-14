@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class TetraminoSO : ScriptableObject
 {
-    public float tempsAvantChuteManuelle;
+    public float timeBeforeSoftDrop;
 }

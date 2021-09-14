@@ -128,6 +128,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Debug",
+            "id": "c59359cb-eeed-4aed-bd2d-208200d4ca1b",
+            "actions": [
+                {
+                    "name": "Debug Toggle",
+                    "type": "Button",
+                    "id": "0d9b3beb-f4d2-43f0-99bd-073f1ee38182",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d625fe5e-63c4-4298-a56d-4037e4abf0c1",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Debug Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

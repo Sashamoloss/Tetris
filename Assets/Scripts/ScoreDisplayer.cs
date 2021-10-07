@@ -15,6 +15,7 @@ public class ScoreDisplayer : MonoBehaviour
     public void UpdateScore()
     {
         txtMeshPro.text = totalScore.value.ToString();
+        Debug.Log("Update Score");
     }
 
 }

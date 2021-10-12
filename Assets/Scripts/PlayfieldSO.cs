@@ -85,8 +85,9 @@ public class PlayfieldSO : ScriptableObject
 
         for (int i = 0; i < w; i++)
         {
-            Destroy(grid[i, y].gameObject);
-            grid[i, y] = null;
+            grid[i, y].gameObject.GetComponent<Animator>().enabled = true; //On active l'animator
+            //Destroy(grid[i, y].gameObject);
+            grid[i, y] = null; //On vide l'emplacement i y
         }
     }
 

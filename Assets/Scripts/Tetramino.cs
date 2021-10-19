@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Tetramino : MonoBehaviour
 {
-    [SerializeField] PlayfieldSO playfield;
+    public PlayfieldSO playfield;
 
     // Start is called before the first frame update
     void Start()

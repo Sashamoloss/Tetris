@@ -7,12 +7,18 @@ public class Chute : MonoBehaviour
 {
     float lastFall = 0;
     private Coroutine coroutineChute;
-    [SerializeField] PlayfieldSO playfield;
+    PlayfieldSO playfield;
     [SerializeField] FloatVariable timeBeforeAutoDrop;
-    [SerializeField] TetraminoSO config;
+    [SerializeField] FloatVariable timeBeforeSoftDrop;
     [SerializeField] GameEventSO startSoftDrop;
     [SerializeField] GameEventSO stopSoftDrop;
     [SerializeField] GameEventSO suddenDrop;
+
+    private void Start()
+    {
+        playfield = GetComponent<Tetramino>().playfield;
+    }
+
     /// <summary>
     /// Descend le transform du Tetramino d'un cran en bas puis vérifie si la position est valide
     /// Si elle ne l'est pas, remonte le Tetramino d'un cran, efface les lignes pleines, spawn la prochaine pièce et détruit ce script
@@ -43,7 +49,7 @@ public class Chute : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(config.timeBeforeSoftDrop);
+            yield return new WaitForSeconds(timeBeforeSoftDrop.value);
             FonctionChute();
         }
 

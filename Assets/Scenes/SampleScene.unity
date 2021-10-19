@@ -1710,8 +1710,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38fa9cd032c481d4e9e6c4d43eeb1c54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: 0449400e7bdeef6498d0d168b5881d4e, type: 2}
   totalScore: {fileID: 11400000, guid: e8163fbc4d9a47047aa3b41dedf37334, type: 2}
+  timeBeforeSoftDrop: {fileID: 11400000, guid: 3e7f24f29c823a34ab287ff72fc5b9d6, type: 2}
   pointsPerRow: {fileID: 11400000, guid: f40186c6b47aeef478851390b8c05e49, type: 2}
   pointsPerTetris: {fileID: 11400000, guid: e2454958666aef14a923ee407646e459, type: 2}
   pointsPerSuddenDrop: {fileID: 11400000, guid: 6cb5447472488f64ab78d7319eed35b4, type: 2}

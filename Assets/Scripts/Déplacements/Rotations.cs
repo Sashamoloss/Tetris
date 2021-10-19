@@ -5,7 +5,11 @@ using UnityEngine.InputSystem;
 
 public class Rotations : MonoBehaviour
 {
-    [SerializeField] PlayfieldSO playfield;
+    PlayfieldSO playfield;
+    private void Start()
+    {
+        playfield = GetComponent<Tetramino>().playfield;
+    }
 
     /// <summary>
     /// Pour tourner le tetramino à droite ou à gauche (le retourne dans l'autre sens si la position est invalide)

@@ -85,10 +85,20 @@ public class PlayfieldSO : ScriptableObject
 
         for (int i = 0; i < w; i++)
         {
-            grid[i, y].gameObject.GetComponent<Animator>().enabled = true; //On active l'animator
-            //Destroy(grid[i, y].gameObject);
-            grid[i, y] = null; //On vide l'emplacement i y
+            var animators = grid[i, y].gameObject.GetComponentsInChildren<Animator>();//On getcomponent tous les animators de chaque block
+            foreach (var animator in animators)//Pour chaque animator
+            {
+                animator.enabled = true;//On l'active
+            }
         }
+    }
+
+    public void EmptyBlock(Vector2 position)
+    {
+        var roundedPos = RoundOffsetVec2(position);//On arrondit la position du block pour avoir un int
+        grid[(int)roundedPos.x, (int)roundedPos.y] = null;//On vide ce qu'il y a à cette position
+        if (IsRowEmpty((int)roundedPos.y))
+            DecreaseRowsAbove((int)roundedPos.y);//On baisse toutes les lignes au dessus de celle qu’on vient d’effacer
     }
 
     /// <summary>
@@ -148,6 +158,19 @@ public class PlayfieldSO : ScriptableObject
         }
         return true;
     }
+
+    public bool IsRowEmpty(int y)
+    {
+        for (int i = 0; i < w; i++)
+        {
+            if (grid[i, y] != null) //dès qu’un bloc est plein, la ligne n’est pas vide et on peut arrêter de vérifier
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /// <summary>
     /// Efface toutes les lignes pleines dans tout le Playfield
     /// </summary>
@@ -160,8 +183,6 @@ public class PlayfieldSO : ScriptableObject
             {
                 rowsCounter++;//On incrémente le compteur de lignes pour savoir si on fait un Tetris
                 DeleteRow(i);//On l’efface
-                DecreaseRowsAbove(i + 1);//On baisse toutes les lignes au dessus de celle qu’on vient d’effacer
-                --i;//On baisse i de un pour revérifier si la ligne est pleine
             }
         }
         if (rowsCounter == 4)

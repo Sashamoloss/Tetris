@@ -10,6 +10,11 @@ public class DestroyBlock : MonoBehaviour
         
     }
 
+    public void Destroy()
+    {
+        GetComponentInParent<Tetramino>().playfield.EmptyBlock(transform.position);//On vide notre position
+        Destroy(gameObject);//On détruit le block
+    }
     // Update is called once per frame
     void Update()
     {

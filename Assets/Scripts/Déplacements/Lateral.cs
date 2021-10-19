@@ -5,7 +5,11 @@ using UnityEngine.InputSystem;
 
 public class Lateral : MonoBehaviour
 {
-    [SerializeField] PlayfieldSO playfield;
+    PlayfieldSO playfield;
+    private void Start()
+    {
+        playfield = GetComponent<Tetramino>().playfield;
+    }
     // Start is called before the first frame update
     /// <summary>
     /// Déplace le tetramino à droite ou à gauche (le redéplace dans l'autre sens si la position est invalide)
